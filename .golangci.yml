@@ -1,0 +1,41 @@
+version: "2"
+linters:
+  default: all
+  disable:
+    - depguard # breaking things: https://github.com/atc0005/go-ci/issues/1024
+    - err113
+    - exhaustruct # pointless
+    - gochecknoglobals # globals are sometimes ok
+    - wsl
+    - noinlineerr
+    - wrapcheck
+    - varnamelen
+    - mnd
+    - nonamedreturns
+  settings:
+    goconst:
+      min-occurrences: 5
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - std-error-handling
+      - common-false-positives
+      - legacy
+    rules:
+      - linters:
+          - goconst
+        path: (.+)_test\.go
+formatters:
+  enable:
+    - gci
+    - gofmt
+    - gofumpt
+    - goimports
+    - golines
+  settings:
+    gci:
+      sections:
+        - standard
+        - default
+        - localmodule
